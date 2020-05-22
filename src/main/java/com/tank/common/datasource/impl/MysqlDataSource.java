@@ -24,6 +24,6 @@ public class MysqlDataSource extends RdbDataSource {
 
   @Override
   protected String assignUrl() {
-    return "jdbc:mysql://localhost:3307/orderCenter";
+    return "jdbc:mysql://localhost:3307/orderCenter?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull";
   }
 }
