@@ -14,7 +14,7 @@ public final class FieldsExtractor {
 
   public static <T> String extractField(@NonNull final Class<T> clazz) {
     List<String> data = Stream.of(clazz.getDeclaredFields()).map(Field::getName)
-            .filter(name -> name.indexOf("_") != -1).toList();
+            .filter(name -> name.indexOf("_") != -1 || "id".equalsIgnoreCase(name)).toList();
     return data.mkString(",");
   }
 }
