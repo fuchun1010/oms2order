@@ -8,12 +8,9 @@ import io.vavr.control.Option;
 import io.vavr.control.Try;
 import lombok.NonNull;
 import lombok.val;
-import org.apache.commons.compress.utils.Sets;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
 /**

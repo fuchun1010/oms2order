@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import static com.tank.common.util.FieldsExtractor.selectFieldsFrom;
 
@@ -16,10 +17,11 @@ public class DbHelperTest {
 
   @Test
   public void findWithoutCondition() throws Throwable {
-    val sql = String.format("select %s from orders limit 1", selectFieldsFrom(SimpleOrder.class));
+    val sql = String.format("select %s from orders limit 200", selectFieldsFrom(SimpleOrder.class));
     ResultsUtils resultsUtils = new ResultsUtils();
     Collection<SimpleOrder> simpleOrders = this.dbHelper.findWithoutCondition(sql, row -> resultsUtils.result2Object(row, SimpleOrder.class));
-    Assert.assertTrue(simpleOrders.size() == 10);
+    val results = simpleOrders.stream().collect(Collectors.toList());
+    Assert.assertTrue(simpleOrders.size() > 0);
     simpleOrders.clear();
   }
 

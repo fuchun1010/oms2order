@@ -1,12 +1,10 @@
 package com.tank.common.util;
 
 import io.vavr.CheckedFunction1;
-import io.vavr.Predicates;
 import io.vavr.control.Try;
 import lombok.NonNull;
 import lombok.val;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.*;
@@ -45,7 +43,7 @@ public class ResultsUtils {
     T obj = clazz.newInstance();
     val metaData = rs.getMetaData();
     int columnCount = metaData.getColumnCount();
-    val columnNames = new String[columnCount];
+
     Map<String, Method> methods = new HashMap<>(2 << 7);
 
     val targetMethods = Stream.of(obj.getClass().getDeclaredMethods())
@@ -56,16 +54,28 @@ public class ResultsUtils {
       methods.putIfAbsent(method.getName().toLowerCase().substring(3), method);
     }
 
-    for (int index = 1; index < columnCount; index++) {
+    for (int index = 1; index <= columnCount; index++) {
 
       val i = index;
-      columnNames[index] = metaData.getColumnName(index);
-
+      val columnName = metaData.getColumnName(index);
       metaData.getColumnType(index);
       int type = metaData.getColumnType(index);
-      Method method = methods.get(columnNames[index]);
+      Method method = methods.get(columnName);
+
+      System.out.println(columnName);
+      if ("status".equalsIgnoreCase(columnName)) {
+        System.out.println();
+      }
 
       boolean successful = assignValue(type, dataType -> dataType == Types.BIGINT, method, obj, rs, row -> row.getLong(i));
+      if (successful) {
+        continue;
+      }
+
+      successful = assignValue(type, dataType -> intTypes.contains(dataType), method, obj, rs, row -> {
+        Long value = rs.getLong(i);
+        return value > Integer.MAX_VALUE ? value : value.intValue();
+      });
       if (successful) {
         continue;
       }
@@ -96,7 +106,8 @@ public class ResultsUtils {
     boolean isSuitable = predicate.test(type) && method != null;
 
     if (isSuitable) {
-      method.invoke(target, fun.apply(rs));
+      Object value = fun.apply(rs);
+      method.invoke(target, value);
       return true;
     }
     return false;

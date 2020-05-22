@@ -44,13 +44,13 @@ public class SimpleOrder {
 
   private String customer_mobile;
 
-  private int region_code;
+  private Long region_code;
 
-  private String city_code;
+  private Long city_code;
 
-  private int status;
+  private Long status;
 
-  private int payment_status;
+  private Long payment_status;
 
   private String order_status;
 
@@ -66,17 +66,17 @@ public class SimpleOrder {
 
   private String delivery_address;
 
-  private int is_erp_print_ticket;
+  private Long is_erp_print_ticket;
 
-  private int is_printed;
+  private Long is_printed;
 
-  private int need_print;
+  private Long need_print;
 
-  private int is_enabled;
+  private Long is_enabled;
 
-  private int is_repair;
+  private Long is_repair;
 
-  private int print_status;
+  private Long print_status;
 
   private String remark;
 
@@ -92,17 +92,17 @@ public class SimpleOrder {
 
   private String updated_at;
 
-  private int record_status;
+  private Long record_status;
 
-  private int is_xinxiang_member;
+  private Long is_xinxiang_member;
 
-  private int dec_price;
+  private Long dec_price;
 
   private String erp_new_trans_no;
 
-  private int sale_type;
+  private Long sale_type;
 
-  private int temperature_zone;
+  private Long temperature_zone;
 
   private String virtual_store_code;
 
@@ -110,9 +110,9 @@ public class SimpleOrder {
 
   private String parent_channel_order_sn;
 
-  private int set_type;
+  private Long set_type;
 
-  private int delivery_cycle;
+  private Long delivery_cycle;
 
   private String origin_sn;
 
