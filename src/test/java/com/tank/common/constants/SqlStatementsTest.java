@@ -26,8 +26,8 @@ public class SqlStatementsTest {
             selectFieldsFrom(SimpleItem.class), seq.replace("[", "")
                     .replace("]", ""));
 
-    Collection<SimpleItem> simpleItems = this.dbHelper.findWithoutCondition(orderSql, rs -> this.resultsUtils.result2Object(rs, SimpleItem.class));
-    simpleItems.stream().forEach(System.out::println);
+    Collection<SimpleItem> simpleItems = this.dbHelper.findWithoutCondition(orderItemSql, rs -> this.resultsUtils.result2Object(rs, SimpleItem.class));
+    simpleItems.stream().map(SimpleItem::getSell_type).forEach(System.out::println);
   }
 
   @Before
