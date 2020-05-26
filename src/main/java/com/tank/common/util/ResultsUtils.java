@@ -62,11 +62,6 @@ public class ResultsUtils {
       int type = metaData.getColumnType(index);
       Method method = methods.get(columnName);
 
-      System.out.println(columnName);
-      if ("status".equalsIgnoreCase(columnName)) {
-        System.out.println();
-      }
-
       boolean successful = assignValue(type, dataType -> dataType == Types.BIGINT, method, obj, rs, row -> row.getLong(i));
       if (successful) {
         continue;

@@ -9,4 +9,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SimpleItem {
+
+  private Long id;
+
+  private Long order_id;
+
+  private String package_no;
+
+  private String sell_type;
 }

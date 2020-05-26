@@ -18,6 +18,7 @@ import java.util.*;
  */
 public class DbHelper {
 
+
   public DbHelper(@NonNull final RdbDataSource rdbDataSource) {
     this.rdbDataSource = rdbDataSource;
   }
